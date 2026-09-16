@@ -1,0 +1,28 @@
+# Logs
+*.log
+
+# Test artifacts (screenshots + downloaded exports) — keep local, out of the repo
+tests/bench-shots/
+
+# Evidence / iteration screenshots — kept local for history, not for the repo
+evidence/
+
+# Node
+node_modules/
+package*.json
+
+# Python (legacy, proxy is node now)
+__pycache__/
+*.pyc
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode
+*.swp
+*.swo
+.serve.pid
+*.pid
