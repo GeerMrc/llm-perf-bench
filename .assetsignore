@@ -1,0 +1,8 @@
+# Everything outside src/ is excluded from the Workers static-assets upload:
+# only src/llm-perf-bench.html is a deployable asset. Worker source lives in
+# src/worker/ and must not be uploaded as a public asset.
+# (gitignore syntax: '#' comments — the earlier C-style block was accidental
+#  but harmless; cleaned up per RECON-P1 D3 / T29a.)
+/*
+!/src
+src/worker

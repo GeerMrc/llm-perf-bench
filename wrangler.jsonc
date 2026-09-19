@@ -1,0 +1,32 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "llm-perf-bench",
+  "compatibility_date": "2026-09-01",
+  "main": "src/worker/index.mjs",
+  "assets": {
+    "directory": "./",
+    "binding": "ASSETS",
+    // serve the exact .html path without the default extension-normalization
+    // redirect (307 .html→extensionless); the root path is served inline by the Worker (T80)
+    "html_handling": "none",
+    // LOAD-BEARING: "none" (default) makes asset misses fall through to the Worker,
+    // which the GET / direct-app serving depends on (T80: / has no asset, the Worker
+    // internally fetches /src/llm-perf-bench.html and returns it at the root URL).
+    // Do NOT set "single-page-application" / "404-page".
+    "not_found_handling": "none",
+    // /api/* must hit the Worker first; everything else tries static assets first.
+    "run_worker_first": ["/api/*"]
+  },
+  // Custom domain (T61→T65 activated): zone 882912.xyz is hosted on this account.
+  // workers.dev stays enabled as the transition entry; add "workers_dev": false to retire.
+  "routes": [{ "pattern": "bench.882912.xyz", "custom_domain": true }],
+  "workers_dev": true,   // keep the workers.dev preview entry alongside the custom domain (transition policy)
+
+  "kv_namespaces": [
+    {
+      "binding": "LEADERBOARD",
+      // Real namespace, created 2026-09-17 during T65 (id is not secret).
+      "id": "7e0cae1a9b5d49a696c5c960d91975c3"
+    }
+  ]
+}

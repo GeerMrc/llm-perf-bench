@@ -1,0 +1,19 @@
+{
+  "name": "llm-perf-bench",
+  "private": true,
+  "description": "LLM Perf Bench — dev tooling only (wrangler/miniflare); the runtime itself stays zero-dependency (single-file HTML + standard Web APIs Worker). NOTE: no \"type\":\"module\" on purpose — repo tests are CommonJS (.js); ESM sources use .mjs (bench_proxy.mjs / worker sources), matching the existing repo convention.",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "test:worker": "node --test tests/worker_api_test.js",
+    "test:worker:e2e": "node tests/worker_e2e_test.js"
+  },
+  "devDependencies": {
+    "miniflare": "^4.20260730.0",
+    "wrangler": "^4.133.0"
+  },
+  "allowScripts": {
+    "workerd@1.20260730.1": true,
+    "workerd@1.20260916.1": true
+  }
+}
